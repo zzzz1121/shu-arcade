@@ -1,5 +1,5 @@
 const mode=1,title='交子二〇四八',canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),scoreEl=document.getElementById('score'),hint=document.getElementById('hint');
-const labels=['铁钱','茶叶','粮袋','药材','纸墨','青布','交子','货栈'],imgs={};for(const n of ['iron','cloth','note','warehouse','goods']){imgs[n]=new Image();imgs[n].src='assets/'+n+'.png'}
+const labels=['铁钱','茶叶','粮袋','药材','纸墨','青布','交子','货栈'],imgs={};for(const n of ['iron','cloth','note','warehouse','goods']){imgs[n]=new Image();imgs[n].src='../../assets/'+n+'.webp?v=2'}
 let motion=null;const reducedMotion=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let score=0,over=false,paused=false,last=0,clock=0,entities=[],grid=[],opened=[],lock=0,moves=0,matched=0,aim=200,lives=3,stack=[],moving=null,direction=1,turn=0,spawn=0;
 let best=0;function hud(){if(score>best){best=score;saveRecord();}scoreEl.textContent='得分 '+score+' · 最佳 '+best;document.getElementById('current').textContent=score;document.getElementById('record').textContent=best}

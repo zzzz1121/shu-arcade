@@ -2,7 +2,7 @@ const canvas=document.querySelector('canvas'),ctx=canvas.getContext('2d'),$=id=>
 const fruits=['铁钱','茶叶','粮袋','药材','纸墨','青布','交子','货栈'],radii=[21,28,36,45,55,64,76,88,104,122],colors=['#d66562','#e98a7c','#ad87b5','#efb564','#db8472','#b9c67b','#efb899','#d6b75b','#a9bf78','#6eaa72'];
 let balls=[],effects=[],score=0,best=0,current=0,next=0,aim=220,cooldown=0,paused=false,ended=false,sound=false,last=0,acc=0,keys={};$('best').textContent=best;
 const spriteCache=new Map();let renderScale=1;
-const art={};for(const name of ['goods','iron','cloth','note','warehouse']){art[name]=new Image();art[name].src='assets/'+name+'.png'}
+const art={};for(const name of ['goods','iron','cloth','note','warehouse']){art[name]=new Image();art[name].src='../../assets/'+name+'.webp?v=2'}
 let audioContext;function chime(level){if(!sound)return;try{if(!audioContext){const AudioCtor=window.AudioContext||window.webkitAudioContext;if(!AudioCtor)return;audioContext=new AudioCtor();}audioContext.resume();const t=audioContext.currentTime,o=audioContext.createOscillator(),g=audioContext.createGain();o.type='sine';o.frequency.setValueAtTime(440+level*55,t);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.035,t+.015);g.gain.exponentialRampToValueAtTime(.001,t+.23);o.connect(g);g.connect(audioContext.destination);o.start(t);o.stop(t+.25)}catch(error){}}
 function random(){return Math.floor(Math.random()*4)}function hud(){$('score').textContent=score;$('best').textContent=best;$('next').textContent=fruits[next]}
 function reset(){balls=[];effects=[];score=0;current=random();next=random();cooldown=0;paused=ended=false;$('overlay').hidden=true;hud()}
